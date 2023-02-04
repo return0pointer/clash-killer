@@ -1,6 +1,8 @@
-﻿using gcore.core.app;
+﻿using _GAME.src.input;
+using gcore.core.app;
 using gcore.core.notification;
 using gcore.gameState;
+using gcore.input;
 using gcore.locale;
 using UnityEngine;
 
@@ -10,12 +12,14 @@ namespace _GAME.src.main
     {
         public ClashKillerApp() : base()
         {
-            LocalizationManager.setInstance(new LocalizationManager());
+            
         }
         
         protected override void init()
         {
             base.init();
+            LocalizationManager.setInstance(new LocalizationManager());
+            GInput.setInstance(new CKInput());
         }
 
         protected override void postInit()
