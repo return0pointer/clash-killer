@@ -1,11 +1,13 @@
-﻿using UnityEditorInternal;
+﻿using gcore.gameState;
 
-namespace _GAME.src.core.app
+namespace gcore.core.app
 {
     public abstract class App
     {
         private static App _instance = null;
 
+        private BaseGameState _mainState;
+        
         public static App instance => _instance;
 
         public App()
@@ -22,6 +24,9 @@ namespace _GAME.src.core.app
             app.postInit();
             app.run();
         }
+
+        public BaseGameState getMainState() => _mainState;
+        public void setMainState(BaseGameState state) => _mainState = state;
 
         protected virtual void run()
         {

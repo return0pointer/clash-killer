@@ -1,4 +1,5 @@
-﻿using _GAME.src.core.app;
+﻿using gcore.core.app;
+using gcore.core.notification;
 
 namespace _GAME.src.main
 {
@@ -6,6 +7,7 @@ namespace _GAME.src.main
     {
         public ClashKillerApp() : base()
         {
+            Notifications.get().addObserver("onInit", run, null);
             
         }
         
@@ -17,6 +19,7 @@ namespace _GAME.src.main
         protected override void postInit()
         {
             base.postInit();
+            Notifications.get().postNotification("onInit", null);
         }
 
         protected override void run()
