@@ -1,5 +1,8 @@
 ﻿using gcore.core.app;
 using gcore.core.notification;
+using gcore.gameState;
+using gcore.locale;
+using UnityEngine;
 
 namespace _GAME.src.main
 {
@@ -7,8 +10,7 @@ namespace _GAME.src.main
     {
         public ClashKillerApp() : base()
         {
-            Notifications.get().addObserver("onInit", run, null);
-            
+            LocalizationManager.setInstance(new LocalizationManager());
         }
         
         protected override void init()
@@ -19,12 +21,17 @@ namespace _GAME.src.main
         protected override void postInit()
         {
             base.postInit();
-            Notifications.get().postNotification("onInit", null);
         }
 
         protected override void run()
         {
             base.run();
+            Debug.Log(Localizer.get("NOT LOCALIZE STRING"));
+        }
+
+        protected override MainState generateMainState()
+        {
+            return new MainState(this);
         }
     }
 }

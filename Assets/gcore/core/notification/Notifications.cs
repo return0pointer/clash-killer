@@ -12,9 +12,16 @@ namespace gcore.core.notification
             if (_instance == null)
             {
                 _instance = new Notifications();
+                _instance.init();;
             }
 
             return _instance;
+        }
+
+        public Notifications()
+        {
+            _noParamObservers = new Dictionary<string, List<Observer<Action>>>();
+            _observers = new Dictionary<string, List<Observer<Action<object>>>>();
         }
 
         public static void setInstance(Notifications instance)
@@ -22,10 +29,15 @@ namespace gcore.core.notification
             _instance = instance;
         }
 
+        public void init()
+        {
+            
+        }
+
         private Dictionary<string, List<Observer<Action>>> _noParamObservers;
         private Dictionary<string, List<Observer<Action<object>>>> _observers;
 
-        public void addObserver(string name, Action action, object data = null)
+        public void subscribe(string name, Action action, object data = null)
         {
             if (!_noParamObservers.ContainsKey(name))
             {
@@ -35,7 +47,7 @@ namespace gcore.core.notification
             _noParamObservers[name].Add(observer);
         }
         
-        public void addObserver(string name, Action<object> action, object data = null)
+        public void subscribe(string name, Action<object> action, object data = null)
         {
             if (!_noParamObservers.ContainsKey(name))
             {
@@ -46,7 +58,7 @@ namespace gcore.core.notification
             _observers[name].Add(observer);
         }
 
-        public void postNotification(string name, object data = null)
+        public void post(string name, object data = null)
         {
             if (_noParamObservers.ContainsKey(name))
             {

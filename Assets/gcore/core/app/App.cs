@@ -1,4 +1,5 @@
-﻿using gcore.gameState;
+﻿using gcore.core.notification;
+using gcore.gameState;
 
 namespace gcore.core.app
 {
@@ -6,7 +7,7 @@ namespace gcore.core.app
     {
         private static App _instance = null;
 
-        private BaseGameState _mainState;
+        private MainState _mainState;
         
         public static App instance => _instance;
 
@@ -25,17 +26,24 @@ namespace gcore.core.app
             app.run();
         }
 
-        public BaseGameState getMainState() => _mainState;
-        public void setMainState(BaseGameState state) => _mainState = state;
+        public MainState getMainState() => _mainState;
+        public void setMainState(MainState state) => _mainState = state;
+
+        protected virtual MainState generateMainState()
+        {
+            return null;
+        }
 
         protected virtual void run()
         {
-            
+            Notifications.get().post(AppNotification.GAME_LAUNCH);
+            setMainState(generateMainState());
+            getMainState().go();
         }
 
         protected virtual void postInit()
         {
-            
+            Notifications.get().post(AppNotification.GAME_INIT);
         }
 
         protected virtual void init()
@@ -45,6 +53,7 @@ namespace gcore.core.app
 
         public void shutdown()
         {
+            Notifications.get().post(AppNotification.GAME_START_CLOSING);
             beforeShutdown();
             _instance = null;
         }
