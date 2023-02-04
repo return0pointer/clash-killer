@@ -1,6 +1,6 @@
 ﻿namespace gcore.gameState
 {
-    public class BaseGameState
+    public abstract class BaseGameState
     {
         private BaseGameState _parent;
         private BaseGameState _currentState;

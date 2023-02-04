@@ -31,7 +31,7 @@ namespace _GAME.src.main
 
         protected override MainState generateMainState()
         {
-            return new MainState(this);
+            return new CKMainState(this);
         }
     }
 }
