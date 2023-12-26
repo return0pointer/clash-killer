@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using _GAME.src.main;
+﻿using _GAME.src.main;
 using gcore.core.app;
 using UnityEngine;
 
